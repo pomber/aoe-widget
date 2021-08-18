@@ -41,29 +41,29 @@ async function fetchLastGames() {
 }
 
 function renderLastMatch({ finished, me, opponent }) {
-  document.querySelector("#last-match .title").innerText = finished
+  q("#last-match .title").innerText = finished
     ? "Ultimo partido"
     : "Jugando ahora";
-  document.querySelector(
-    "#last-match .me"
-  ).innerText = `${me.name} (${me.rating}) `;
-  document.querySelector(
-    "#last-match .opponent"
-  ).innerText = `${opponent.name} (${opponent.rating})`;
+
+  q("#last-match .me .name").innerText = me.name;
+  q("#last-match .me .country").src = countryUrl(me.country);
+  q("#last-match .me .elo").innerText = me.rating + " ELO";
+  q("#last-match .me .civ").src = civUrl(me.civ, true);
+
+  q("#last-match .opponent .name").innerText = opponent.name;
+  q("#last-match .opponent .country").src = countryUrl(opponent.country);
+  q("#last-match .opponent .elo").innerText = opponent.rating + " ELO";
+  q("#last-match .opponent .civ").src = civUrl(opponent.civ, false);
 }
 
 function renderMoreMatches(moreMatches) {
   const parent = document.getElementById("more-matches");
-  const template = document.querySelector("#match-template");
+  const template = q("#match-template");
 
   moreMatches.forEach(({ me, finished, opponent }) => {
     const matchElement = template.content.cloneNode(true);
     matchElement.querySelector(".time-ago").innerText = getTimeAgo(finished);
-    matchElement.querySelector(".country").src =
-      "https://raw.githubusercontent.com/lipis/flag-icon-css/master/flags/1x1/" +
-      opponent.country.toLowerCase() +
-      ".svg";
-
+    matchElement.querySelector(".country").src = countryUrl(opponent.country);
     matchElement.querySelector(".result").innerText = me.won
       ? "le ganamos a"
       : "perdimos contra";
@@ -73,6 +73,18 @@ function renderMoreMatches(moreMatches) {
 
     parent.appendChild(matchElement);
   });
+}
+
+function q(selector) {
+  return document.querySelector(selector);
+}
+
+function countryUrl(country) {
+  return (
+    "https://raw.githubusercontent.com/lipis/flag-icon-css/master/flags/1x1/" +
+    country.toLowerCase() +
+    ".svg"
+  );
 }
 
 function getTimeAgo(ts) {
@@ -102,4 +114,54 @@ function getTimeAgo(ts) {
 
   const count = Math.floor(secondsAgo / divisor);
   return `${count} ${unit}${count > 1 ? "s" : ""}`;
+}
+
+const civs = [
+  "unknown",
+  "britons",
+  "franks",
+  "goths",
+  "teutons",
+  "japanese",
+  "chinese",
+  "byzantines",
+  "persians",
+  "saracens",
+  "turks",
+  "vikings",
+  "mongols",
+  "celts",
+  "spanish",
+  "aztecs",
+  "mayans",
+  "huns",
+  "koreans",
+  "italians",
+  "indians",
+  "incas",
+  "magyars",
+  "slavs",
+  "portuguese",
+  "ethiopians",
+  "malians",
+  "berbers",
+  "khmer",
+  "malay",
+  "burmese",
+  "vietnamese",
+  "bulgarians",
+  "tatars",
+  "cumans",
+  "lithuanians",
+  "burgundians",
+  "sicilians",
+  "poles",
+  "bohemians"
+];
+
+function civUrl(civId, itsMe) {
+  const civName = civs[civId];
+  return `https://overlays.polskafan.de/rating/img/civs/${
+    itsMe ? "left" : "right"
+  }/${civName}-DE.png`;
 }

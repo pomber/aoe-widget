@@ -2,37 +2,124 @@
   body {
     background: url(./img/bg.png);
     background-repeat: no-repeat;
-    background-position: -13px -35px;
-    background-size: 393px;
-    padding: 40px 40px;
-    color: #301917;
+    background-position: -12px -28px;
+    background-size: 312px;
+    padding: 60px 40px;
     width: 300px;
+    box-sizing: border-box;
+    color: #301917;
     margin:0;
+    /* outline: 1px solid red; */
   }
-  #last-match .title {
-    background: #D7B394
+  .title {
+    background: #D7B394;
+    text-align: center;
+    padding: 4px;
   }
+
+  #last-match .container {
+    text-align: center;
+    border: 1px solid gold;
+    background: #B89579;
+    background: #434343;
+    color: #fafafa;
+    padding: 6px 10px;
+    font-size: 24px;
+    position: relative
+  }
+  #last-match .me {
+    text-align: right;
+  }
+  #last-match .opponent {
+    text-align: left;
+  }
+  #last-match .name {
+    z-index: 2;
+  }
+
+  #last-match .elo {
+    font-size: 16px;
+    opacity: 0.85;
+  }
+
+  
+#last-match .country {
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+    vertical-align: middle;
+}
+
+#last-match .civ {
+  position: absolute;
+  width: 80px;
+  z-index: 0;
+}
+  
+#last-match .me .civ {
+  left: 0;
+  top: 0;
+}
+
+#last-match .opponent .civ {
+  bottom: 0;
+  right: 0;
+}
+
+#more-matches {
+  
+  border: 1px solid gold;
+  background: #BA9B7D;
+}
+
+#more-matches .match{
+  padding: 4px;
+}
+
+#more-matches .match:nth-child(odd){
+  background-color: #4C8BF5;
+    background: #D7B394;
+}
   #more-matches .country {
     height: 16px;
     width: 16px;
     border-radius: 50%;
+    vertical-align: middle;
   }
 </style>
 
 <div id="last-match">
   <h2 class="title">Jugando ahora</h2>
-  <div class="me">ThePomber</div>
-  <div class="opponent">SalzZ_Vinchester</div>
+  <div class="container">
+  <div class="me">    
+    <img class="civ"></img>
+    <div class="name"></div>
+    <div>
+      <span class="elo"></span>
+      <img class="country"></img>
+    </div>
+  </div>
+  <div style="font-size:16px;margin:10px;">vs</div>  
+  <div class="opponent">
+      <img class="civ"></img>
+      <div>
+        <img class="country"></img>
+        <span class="elo"></span>
+      </div>
+      <div class="name"></div>
+    </div>
+</div>
 </div>
 
-<h2>Historial</h2>
+<h2 class="title">Historial</h2>
 <div id="more-matches">
   <template id="match-template">
+    <div class="match">
     Hace <span class="time-ago">1 hora</span>
     <span class="result">le ganamos a</span><br/>
     <img class="country"></img>
     <span class="opponent">SalzZ_Vinchester</span>
-    <hr/>
+  </div>
   </template>
 </div>
 
