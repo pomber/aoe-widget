@@ -1,2 +1,39 @@
-<h1>test 1</h1>
-<h1>test 2</h1>
+<style>
+  body {
+    background: url(./img/bg.png);
+    background-repeat: no-repeat;
+    background-position: -13px -35px;
+    background-size: 393px;
+    padding: 40px 40px;
+    color: #301917;
+    width: 300px;
+    margin:0;
+  }
+  #last-match .title {
+    background: #D7B394
+  }
+  #more-matches .country {
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+  }
+</style>
+
+<div id="last-match">
+  <h2 class="title">Jugando ahora</h2>
+  <div class="me">ThePomber</div>
+  <div class="opponent">SalzZ_Vinchester</div>
+</div>
+
+<h2>Historial</h2>
+<div id="more-matches">
+  <template id="match-template">
+    Hace <span class="time-ago">1 hora</span>
+    <span class="result">le ganamos a</span><br/>
+    <img class="country"></img>
+    <span class="opponent">SalzZ_Vinchester</span>
+    <hr/>
+  </template>
+</div>
+
+<script src="./index.js"></script>
