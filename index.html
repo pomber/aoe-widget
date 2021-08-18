@@ -69,7 +69,7 @@
 #more-matches {
   
   border: 1px solid gold;
-  background: #BA9B7D;
+    background: #D7B394;
 }
 
 #more-matches .match{
@@ -77,8 +77,7 @@
 }
 
 #more-matches .match:nth-child(odd){
-  background-color: #4C8BF5;
-    background: #D7B394;
+  background: #BA9B7D;
 }
   #more-matches .country {
     height: 16px;
@@ -112,15 +111,15 @@
 </div>
 
 <h2 class="title">Historial</h2>
+<template id="match-template">
+  <div class="match">
+  Hace <span class="time-ago">1 hora</span>
+  <span class="result">le ganamos a</span><br/>
+  <img class="country"></img>
+  <span class="opponent">SalzZ_Vinchester</span>
+</div>
+</template>
 <div id="more-matches">
-  <template id="match-template">
-    <div class="match">
-    Hace <span class="time-ago">1 hora</span>
-    <span class="result">le ganamos a</span><br/>
-    <img class="country"></img>
-    <span class="opponent">SalzZ_Vinchester</span>
-  </div>
-  </template>
 </div>
 
 <script src="./index.js"></script>

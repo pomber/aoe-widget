@@ -1,11 +1,14 @@
 const MATCHES_COUNT = 6;
+const urlParams = new URLSearchParams(window.location.search);
+const steamId = urlParams.get("steam_id") || "76561198168845614";
 
-fetchLastGames();
+function refetch() {
+  fetchLastGames().then(() => window.setTimeout(refetch, 30 * 1000));
+}
+
+refetch();
 
 async function fetchLastGames() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const steamId = urlParams.get("steam_id") || "76561198168845614";
-
   const url = `https://aoe2.net/api/player/matches?game=aoe2de&steam_id=${steamId}&count=25`;
   const response = await fetch(url);
   const fullMatches = await response.json();
@@ -60,6 +63,8 @@ function renderMoreMatches(moreMatches) {
   const parent = document.getElementById("more-matches");
   const template = q("#match-template");
 
+  parent.innerHTML = "";
+
   moreMatches.forEach(({ me, finished, opponent }) => {
     const matchElement = template.content.cloneNode(true);
     matchElement.querySelector(".time-ago").innerText = getTimeAgo(finished);
@@ -94,7 +99,10 @@ function getTimeAgo(ts) {
     WEEK = DAY * 7,
     MONTH = DAY * 30;
 
-  const secondsAgo = Math.round(+new Date() / 1000 - ts);
+  const now = new Date();
+  const secondsAgo = Math.round(
+    now.getTime() / 1000 - now.getTimezoneOffset() * 60 - ts
+  );
   let divisor = null;
   let unit = null;
 
