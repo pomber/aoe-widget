@@ -8,9 +8,11 @@
     width: 300px;
     box-sizing: border-box;
     color: #301917;
-    margin:0;
+    margin: 0;
+    overflow: hidden;
     /* outline: 1px solid red; */
   }
+
   .title {
     background: #D7B394;
     text-align: center;
@@ -27,12 +29,15 @@
     font-size: 24px;
     position: relative
   }
+
   #last-match .me {
     text-align: right;
   }
+
   #last-match .opponent {
     text-align: left;
   }
+
   #last-match .name {
     z-index: 2;
   }
@@ -46,65 +51,104 @@
     text-decoration: line-through;
   }
 
-  
-#last-match .country {
-  height: 16px;
-  width: 16px;
-  border-radius: 50%;
-    vertical-align: middle;
-}
 
-#last-match .civ {
-  position: absolute;
-  width: 80px;
-  z-index: 0;
-}
-  
-#last-match .me .civ {
-  left: 0;
-  top: 0;
-}
-
-#last-match .opponent .civ {
-  bottom: 0;
-  right: 0;
-}
-
-#more-matches {
-  
-  border: 1px solid gold;
-    background: #D7B394;
-    margin-top: 20px;
-}
-
-#more-matches .match{
-  padding: 6px;
-}
-
-#more-matches .match:nth-child(odd){
-  background: #BA9B7D;
-}
-  #more-matches .country {
+  #last-match .country {
     height: 16px;
     width: 16px;
     border-radius: 50%;
     vertical-align: middle;
+  }
+
+  #last-match .civ {
+    position: absolute;
+    width: 80px;
+    z-index: 0;
+  }
+
+  #last-match .me .civ {
+    left: 0;
+    top: 0;
+  }
+
+  #last-match .opponent .civ {
+    bottom: 0;
+    right: 0;
+  }
+
+  #more-matches {
+    border: 1px solid gold;
+    background: #D7B394;
+    margin-top: 20px;
+  }
+
+  #more-matches .match {
+    display: flex;
+    padding: 6px 0;
+    align-items: center;
+  }
+
+#more-matches .result {
+  text-align: right;
+}
+
+#more-matches .result.loss {
+  color: #8c1211
+}
+
+  #more-matches .result.win {
+    color: #271077
+  }
+
+  #more-matches .match:nth-child(odd) {
+    background: #BA9B7D;
+  }
+
+  #more-matches .country {
+    height: 14px;
+    width: 14px;
+    border-radius: 50%;
+    vertical-align: middle;
+  }
+
+#more-matches .bottom {
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+}
+
+#more-matches .top {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 170px;
+    margin-bottom: 4px;
+}
+
+  #more-matches .right {
+    flex: 1;
+    padding-left: 8px;
+    /* text-align: right; */
+  }
+
+  #more-matches .result-img {
+    height: 24px;
+    padding: 0 8px;
   }
 </style>
 
 <div id="last-match">
   <h2 class="title">Jugando ahora</h2>
   <div class="container">
-  <div class="me">    
-    <img class="civ"></img>
-    <div class="name"></div>
-    <div>
-      <span class="elo"></span>
-      <img class="country"></img>
+    <div class="me">
+      <img class="civ"></img>
+      <div class="name"></div>
+      <div>
+        <span class="elo"></span>
+        <img class="country"></img>
+      </div>
     </div>
-  </div>
-  <div style="font-size:16px;margin:10px;">vs</div>  
-  <div class="opponent">
+    <div style="font-size:16px;margin:10px;">vs</div>
+    <div class="opponent">
       <img class="civ"></img>
       <div>
         <img class="country"></img>
@@ -112,17 +156,25 @@
       </div>
       <div class="name"></div>
     </div>
-</div>
+  </div>
 </div>
 
 <!-- <h2 class="title">Historial</h2> -->
 <template id="match-template">
   <div class="match">
-  Hace <span class="time-ago">1 hora</span>
-  <span class="result">le ganamos a</span><br/>
-  <img class="country"></img>
-  <span class="opponent">SalzZ_Vinchester</span>
-</div>
+    <div class="right">
+      <div class="top">
+        <img class="country"></img>
+        <span class="elo"></span>
+        <b class="opponent"></b>
+      </div>
+      <div class="bottom">
+        <i>hace <span class="time-ago"></span></i>
+        <span class="result"></span>
+      </div>
+    </div>
+    <img class="result-img" src="./img/winner.png"></img>
+  </div>
 </template>
 <div id="more-matches">
 </div>

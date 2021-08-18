@@ -3,7 +3,9 @@ const urlParams = new URLSearchParams(window.location.search);
 const steamId = urlParams.get("steam_id") || "76561198168845614";
 
 function refetch() {
-  fetchLastGames().then(() => window.setTimeout(refetch, 30 * 1000));
+  fetchLastGames().then(() => {
+    // window.setTimeout(refetch, 30 * 1000);
+  });
 }
 
 refetch();
@@ -21,13 +23,22 @@ async function fetchLastGames() {
   }) {
     const me = players.find((p) => p.steam_id == steamId);
     const notMe = players.find((p) => p.steam_id != steamId);
-    const mapPlayer = ({ name, country, rating, civ, civ_alpha, won }) => ({
+    const mapPlayer = ({
       name,
       country,
       rating,
       civ,
       civ_alpha,
-      won
+      won,
+      rating_change
+    }) => ({
+      name,
+      country,
+      rating,
+      civ,
+      civ_alpha,
+      won,
+      rating_change
     });
     return {
       match_id,
@@ -67,14 +78,24 @@ function renderMoreMatches(moreMatches) {
 
   moreMatches.forEach(({ me, finished, opponent }) => {
     const matchElement = template.content.cloneNode(true);
+    matchElement.querySelector(".result-img").src = me.won
+      ? "./img/winner.png"
+      : "./img/defeated.png";
     matchElement.querySelector(".time-ago").innerText = getTimeAgo(finished);
     matchElement.querySelector(".country").src = countryUrl(opponent.country);
+    const change = !me.rating_change
+      ? ""
+      : me.rating_change > 0
+      ? " +" + me.rating_change
+      : " " + me.rating_change;
     matchElement.querySelector(".result").innerText = me.won
-      ? "le ganamos a"
-      : "perdimos contra";
-    matchElement.querySelector(".opponent").innerText = `${opponent.name} (${
-      opponent.rating || "unranked"
-    })`;
+      ? `ganamos${change}`
+      : `perdimos${change}`;
+    matchElement
+      .querySelector(".result")
+      .classList.add(me.won ? `win` : `loss`);
+    matchElement.querySelector(".elo").innerText = opponent.rating;
+    matchElement.querySelector(".opponent").innerText = opponent.name;
 
     parent.appendChild(matchElement);
   });
@@ -112,12 +133,8 @@ function getTimeAgo(ts) {
     [divisor, unit] = [MINUTE, "minuto"];
   } else if (secondsAgo < DAY) {
     [divisor, unit] = [HOUR, "hora"];
-  } else if (secondsAgo < WEEK) {
+  } else if (secondsAgo) {
     [divisor, unit] = [DAY, "dia"];
-  } else if (secondsAgo < MONTH) {
-    [divisor, unit] = [WEEK, "semana"];
-  } else {
-    [divisor, unit] = [MONTH, "mes"];
   }
 
   const count = Math.floor(secondsAgo / divisor);
@@ -172,4 +189,12 @@ function civUrl(civId, itsMe) {
   return `https://overlays.polskafan.de/rating/img/civs/${
     itsMe ? "left" : "right"
   }/${civName}-DE.png`;
+}
+
+function ellipsis(name, limit) {
+  if (name.length > limit) {
+    return name.slice(0, limit - 3) + "...";
+  } else {
+    return name;
+  }
 }
