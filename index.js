@@ -4,7 +4,7 @@ const steamId = urlParams.get("steam_id") || "76561198168845614";
 
 function refetch() {
   fetchLastGames().then(() => {
-    // window.setTimeout(refetch, 30 * 1000);
+    window.setTimeout(refetch, 30 * 1000);
   });
 }
 
