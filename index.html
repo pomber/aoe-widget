@@ -42,6 +42,10 @@
     opacity: 0.85;
   }
 
+  #last-match .lost .name {
+    text-decoration: line-through;
+  }
+
   
 #last-match .country {
   height: 16px;
@@ -70,10 +74,11 @@
   
   border: 1px solid gold;
     background: #D7B394;
+    margin-top: 20px;
 }
 
 #more-matches .match{
-  padding: 4px;
+  padding: 6px;
 }
 
 #more-matches .match:nth-child(odd){
@@ -110,7 +115,7 @@
 </div>
 </div>
 
-<h2 class="title">Historial</h2>
+<!-- <h2 class="title">Historial</h2> -->
 <template id="match-template">
   <div class="match">
   Hace <span class="time-ago">1 hora</span>
