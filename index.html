@@ -46,19 +46,32 @@
     z-index: 2;
   }
 
+  #last-match .result-img {
+    display: none;
+    height: 26px;
+    vertical-align: middle;
+  }
+
   #last-match .elo {
-    font-size: 18px;
+    font-size: 20px;
     color: #e1e1e1
   }
 
-  #last-match .lost .name {
+  #last-match.loss .me .name,
+  #last-match.win .opponent .name {
     text-decoration: line-through;
   }
 
+  #last-match.win .me .result-img,
+  #last-match.loss .opponent .result-img {
+    display: inline-block;
+  }
+
+
 
   #last-match .country {
-    height: 18px;
-    width: 18px;
+    height: 20px;
+    width: 20px;
     border-radius: 50%;
     vertical-align: middle;
   }
@@ -91,13 +104,13 @@
     align-items: center;
   }
 
-#more-matches .result {
-  text-align: right;
-}
+  #more-matches .result {
+    text-align: right;
+  }
 
-#more-matches .result.loss {
-  color: #8c1211
-}
+  #more-matches .result.loss {
+    color: #8c1211
+  }
 
   #more-matches .result.win {
     color: #271077
@@ -114,19 +127,19 @@
     margin-bottom: -1px;
   }
 
-#more-matches .bottom {
-  font-size: 14px;
-  display: flex;
-  justify-content: space-between;
-}
+  #more-matches .bottom {
+    font-size: 13px;
+    display: flex;
+    justify-content: space-between;
+  }
 
-#more-matches .top {
+  #more-matches .top {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     width: 170px;
     margin-bottom: 4px;
-}
+  }
 
   #more-matches .right {
     flex: 1;
@@ -147,6 +160,8 @@
       <img class="civ"></img>
       <div class="name"></div>
       <div>
+
+        <img class="result-img" src="./img/winner.png"></img>
         <span class="elo"></span>
         <img class="country"></img>
       </div>
@@ -154,11 +169,12 @@
     <div style="font-size:16px;margin:10px;color:#aaa">vs</div>
     <div class="opponent">
       <img class="civ"></img>
+      <div class="name"></div>
       <div>
         <img class="country"></img>
         <span class="elo"></span>
+        <img class="result-img" src="./img/winner.png"></img>
       </div>
-      <div class="name"></div>
     </div>
   </div>
 </div>

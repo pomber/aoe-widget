@@ -55,8 +55,11 @@ async function fetchLastGames() {
 }
 
 function renderLastMatch({ finished, me, opponent }) {
+  if (finished) {
+    q("#last-match").classList.add(me.won ? `win` : `loss`);
+  }
   q("#last-match .title").innerText = finished
-    ? "Ultimo partido"
+    ? "Ultimo resultado"
     : "Jugando ahora";
 
   q("#last-match .me .name").innerText = me.name;
