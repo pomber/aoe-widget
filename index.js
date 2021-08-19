@@ -14,7 +14,9 @@ async function fetchLastGames() {
   const url = `https://aoe2.net/api/player/matches?game=aoe2de&steam_id=${steamId}&count=25`;
   const response = await fetch(url);
   const fullMatches = await response.json();
-  const individualMatches = fullMatches.filter((m) => m.leaderboard_id === 3);
+  const individualMatches = fullMatches.filter(
+    (m) => m.leaderboard_id === 3 || m.leaderboard_id === 13
+  );
   const matches = individualMatches.map(function toSmallMatch({
     match_id,
     started,
