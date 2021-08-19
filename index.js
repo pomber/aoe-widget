@@ -57,7 +57,7 @@ async function fetchLastGames() {
 function renderLastMatch({ finished, me, opponent }) {
   q("#last-match").classList.remove(`win`);
   q("#last-match").classList.remove(`loss`);
-  if (finished) {
+  if (finished && me.won != null) {
     q("#last-match").classList.add(me.won ? `win` : `loss`);
   }
   q("#last-match .title").innerText = finished
