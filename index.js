@@ -131,9 +131,9 @@ function getTimeAgo(ts) {
   let unit = null;
 
   if (secondsAgo < MINUTE) {
-    return secondsAgo + " segundos";
+    return secondsAgo + " seg";
   } else if (secondsAgo < HOUR) {
-    [divisor, unit] = [MINUTE, "minuto"];
+    [divisor, unit] = [MINUTE, "min"];
   } else if (secondsAgo < DAY) {
     [divisor, unit] = [HOUR, "hora"];
   } else if (secondsAgo) {
