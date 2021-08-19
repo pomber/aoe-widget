@@ -55,6 +55,8 @@ async function fetchLastGames() {
 }
 
 function renderLastMatch({ finished, me, opponent }) {
+  q("#last-match").classList.remove(`win`);
+  q("#last-match").classList.remove(`loss`);
   if (finished) {
     q("#last-match").classList.add(me.won ? `win` : `loss`);
   }
@@ -74,7 +76,7 @@ function renderLastMatch({ finished, me, opponent }) {
 }
 
 function renderMoreMatches(moreMatches) {
-  const parent = document.getElementById("more-matches");
+  const parent = q("#more-matches .content");
   const template = q("#match-template");
 
   parent.innerHTML = "";

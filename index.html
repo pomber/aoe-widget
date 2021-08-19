@@ -20,7 +20,7 @@
   .title {
     background: #D7B394;
     text-align: center;
-    padding: 9px 4px 4px;
+    padding: 9px 4px 5px;
     background: url(./img/frame.png);
     background-repeat: no-repeat;
     background-position: -6px -3px;
@@ -32,17 +32,29 @@
   }
 
   #last-match .container {
+    position: relative;
+    margin-bottom: 18px;
+  }
+
+  #last-match .content {
     text-align: center;
-    border: 1px solid gold;
-    background: #B89579;
     background: #434343;
     color: #fafafa;
     padding: 6px 10px;
     font-size: 24px;
-    position: relative;
     margin-bottom: 18px;
     overflow: hidden;
   }
+
+  .frame {
+    border: 14px solid;
+    border-image: url(./img/box2a.png) 30;
+    inset: -5px;
+
+    position: absolute;
+    /* margin-top: 30px; */
+  }
+
 
   #last-match .me {
     text-align: right;
@@ -103,10 +115,10 @@
   }
 
   #more-matches {
+    position: relative;
     border: 1px solid gold;
-    background: #D7B394;
-    /* margin-top: 30px; */
   }
+
 
   #more-matches .match {
     display: flex;
@@ -166,24 +178,27 @@
 <div id="last-match">
   <h2 class="title">Jugando ahora</h2>
   <div class="container">
-    <div class="me">
-      <img class="civ"></img>
-      <div class="name"></div>
-      <div>
+    <div class="frame"></div>
+    <div class="content">
+      <div class="me">
+        <img class="civ"></img>
+        <div class="name"></div>
+        <div>
 
-        <img class="result-img" src="./img/winner.png"></img>
-        <span class="elo"></span>
-        <img class="country"></img>
+          <img class="result-img" src="./img/winner.png"></img>
+          <span class="elo"></span>
+          <img class="country"></img>
+        </div>
       </div>
-    </div>
-    <div style="font-size:16px;margin:10px;color:#aaa">vs</div>
-    <div class="opponent">
-      <img class="civ"></img>
-      <div class="name"></div>
-      <div>
-        <img class="country"></img>
-        <span class="elo"></span>
-        <img class="result-img" src="./img/winner.png"></img>
+      <div style="font-size:16px;margin:10px;color:#aaa">vs</div>
+      <div class="opponent">
+        <img class="civ"></img>
+        <div class="name"></div>
+        <div>
+          <img class="country"></img>
+          <span class="elo"></span>
+          <img class="result-img" src="./img/winner.png"></img>
+        </div>
       </div>
     </div>
   </div>
@@ -207,6 +222,8 @@
   </div>
 </template>
 <div id="more-matches">
+  <div class="frame"></div>
+  <div class="content"></div>
 </div>
 
 <script src="./index.js"></script>
